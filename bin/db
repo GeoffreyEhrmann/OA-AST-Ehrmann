@@ -1,0 +1,53 @@
+#!/usr/bin/env coffee
+
+dbUsers = require('../src/db')("#{__dirname}/../db/users")
+dbMetrics = require('../src/db')("#{__dirname}/../db/metrics")
+dbUserMetrics = require('../src/db')("#{__dirname}/../db/user-metrics")
+
+faker = require "faker"
+
+wsMetrics = dbMetrics.createWriteStream()
+wsUserMetrics = dbUserMetrics.createWriteStream()
+
+wsMetrics.on 'error', console.log
+wsMetrics.on 'close', () ->
+  console.log 'done inserting metrics'
+
+wsUserMetrics.on 'error', console.log
+wsUserMetrics.on 'close', () ->
+  console.log 'done inserting user-metrics'
+
+#add user
+for nb in [0...2]
+  user =
+    username: faker.internet.userName()
+    pwd: faker.internet.password()
+    email: faker.internet.email()
+    name: faker.name.firstName()
+  
+  console.log 'username : ' + user.username
+  console.log 'password : ' + user.pwd
+
+  dbUsers.put 'user:'+user.username,
+    "#{user.name}:#{user.pwd}:#{user.email}",
+    () ->
+      console.log 'inserting user done'
+
+  #add 2 batch of metrics and user-metrics
+  for dvbdb in [0...2]
+    id = faker.random.uuid()
+    for i in [0...10]
+      timestamp = new Date(faker.date.past(1)).getTime()
+      value = 10*i
+      
+      #write metrics into db
+      wsMetrics.write
+        key: "metric:#{id}:#{timestamp}"
+        value: value
+      
+    wsUserMetrics.write
+      key: "user-metrics:#{user.username}:#{id}"
+      value: true
+
+wsUserMetrics.end()
+wsMetrics.end()

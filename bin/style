@@ -1,0 +1,2 @@
+#!/bin/bash
+./node_modules/stylus/bin/stylus -w style.styl -o public/css/style.css
