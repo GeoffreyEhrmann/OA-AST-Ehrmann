@@ -10,7 +10,7 @@ block head
 block content
   .container
     .flexible-space-line
-      h2 Hey, #{name} ! Welcome to our project
+      h2 Hey, #{name} ! Welcome to your metrics
       button.btn.btn-danger(href='/logout' onClick='document.location.href="/logout"') Logout
   .container
     .row
@@ -36,13 +36,6 @@ block content
                   .col-lg-offset-4.col-lg-6
                     button(type='submit' , class='btn btn-primary') Add
 
-      .col-md-3.col-lg-3.col-sm-12
-          .panel.panel-default
-            .panel-heading Remove a metric
-            .panel-body
-              form#delete-form
-                select(name="metric")#select-metric
-                input(value="Delete").btn.btn-danger#delete-button
 
 
     script
@@ -52,12 +45,6 @@ block content
         chart = {}
 
 
-        refreshForm = (array) ->
-          $('#select-metric').empty()
-          for k in array
-            x = Math.random() * 20
-            $('#select-metric').append("<option value='" + k.id + "'>" + x + "</option>")
-          $('#delete-form').css("display":"flex")
 
         drawGraph = () ->
           values = [1,2,2,4,-2,15,0]
@@ -65,7 +52,7 @@ block content
           x = [0,1,2,3,4,5,6]
 
 
-          refreshForm(graphData)
+
           ctx = document.getElementById('metrics')
           chart = new Chart(ctx,
             type: 'line'
