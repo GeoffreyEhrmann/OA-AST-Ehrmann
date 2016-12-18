@@ -4,5 +4,4 @@ bower_components/*
 .vscode
 .DS_Store
 lib/*
-public/css/style.css
 bin/*
