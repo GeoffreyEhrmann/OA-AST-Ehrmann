@@ -8,9 +8,10 @@ block head
   script(src="/bower_components/chart.js/dist/Chart.bundle.min.js")
 
 block content
-  .container.row
+  .container
+    .flexible-space-line
       h2 Hey, #{name} ! Welcome to our project
-      button.button-right.btn.btn-danger(href='/logout' onClick='document.location.href="/logout"') Logout
+      button.btn.btn-danger(href='/logout' onClick='document.location.href="/logout"') Logout
   .container
     .row
       .col-md-9.col-lg-9.col-sm-12
@@ -46,16 +47,6 @@ block content
 
     script
       :coffee-script
-
-        $.ajax(
-          type: 'get'
-          url: '/user-metrics/',
-          headers:{
-            'X-HTTP-Method-Override', 'get'
-          }
-        ).done((data) ->
-          
-        )
 
         graphData = []
         chart = {}
@@ -95,11 +86,7 @@ block content
           )
 
 
-            
-
-
         drawGraph()
-
 
         
 
