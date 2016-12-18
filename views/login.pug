@@ -2,9 +2,10 @@ extends layout
 
 block content
   .container
-    .jumbotron.headerLogin
+    .jumbotron.margin-top.col-md-offset-4.col-md-4
       #form
         p Please enter your IDs
+        hr
         form#login(action='/login', method="post")
           .form-group
             label Username :
@@ -17,6 +18,6 @@ block content
           button#login_submit.btn.btn-success.btn-block(type='submit')
             i.icon-ok.icon-white
             |  Connect to your account
-            
+          hr
         form(action='/signup', method="get")
           button.btn.btn-primary.btn-block(type='submit') Create a new account
