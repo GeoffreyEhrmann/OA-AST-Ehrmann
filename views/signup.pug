@@ -2,19 +2,19 @@ extends layout
 
 block content
   .container
-    .jumbotron.headerLogin.col-md-offset-4.col-md-4.col-lg-offset-4.col-lg-4
+    .jumbotron.headerLogin.col-md-offset-3.col-md-6.col-lg-offset-3.col-lg-6
       #form
         p Please create yout account
         form#login(action='/signup', method="post")
           .form-group.row
             label Username :
-            input(type='text', name="username").pull-right.col-md-offset-2
+            input(type='text', name="username").pull-right.col-md-offset-1
           .form-group.row
             label Password :
-            input(type='password', name="password").pull-right.col-md-offset-2
+            input(type='password', name="password").pull-right.col-md-offset-1
           .form-group.row
             label Email :
-            input(type='email', name="email").pull-right.col-md-offset-2
+            input(type='email', name="email").pull-right.col-md-offset-1
 
           button#login_submit.btn.btn-success.btn-block(type='submit')
             i.icon-ok.icon-white
