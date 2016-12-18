@@ -12,7 +12,7 @@ user =
 dbusers.put 'user:'+user.username,
   "#{user.name}:#{user.pwd}:#{user.email}",
   () ->
-    console.log 'users have been created'
+    console.log 'user have been created'
     console.log 'user 1 username : ' + user.username
     console.log 'password user 1 : ' + user.pwd
 
@@ -26,6 +26,6 @@ user =
 dbusers.put 'user:'+user.username,
   "#{user.name}:#{user.pwd}:#{user.email}",
   () ->
-    console.log 'users have been created'
+    console.log 'user have been created'
     console.log 'user 2 username : ' + user.username
     console.log 'password user 2 : ' + user.pwd
