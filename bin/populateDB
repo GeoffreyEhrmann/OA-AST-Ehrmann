@@ -1,0 +1,31 @@
+#!/usr/bin/env coffee
+
+dbusers = require('../src/db')("#{__dirname}/../db/users")
+
+#first user
+user =
+  username: 'batman'
+  pwd: 'robin'
+  email: 'bat@man.mobile'
+  name: 'bruce'
+
+dbusers.put 'user:'+user.username,
+  "#{user.name}:#{user.pwd}:#{user.email}",
+  () ->
+    console.log 'users have been created'
+    console.log 'user 1 username : ' + user.username
+    console.log 'password user 1 : ' + user.pwd
+
+#second user
+user =
+  username: 'greenlantern'
+  pwd: 'vert'
+  email: 'green@lantern.corp'
+  name: 'al'
+
+dbusers.put 'user:'+user.username,
+  "#{user.name}:#{user.pwd}:#{user.email}",
+  () ->
+    console.log 'users have been created'
+    console.log 'user 2 username : ' + user.username
+    console.log 'password user 2 : ' + user.pwd
