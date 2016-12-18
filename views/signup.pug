@@ -2,20 +2,22 @@ extends layout
 
 block content
   .container
-    .jumbotron.margin-top
+    .jumbotron.margin-top.col-md-offset-4.col-md-4
       #form
         p Please create yout account
+        hr
         form#login(action='/signup', method="post")
-          .form-group
-            label Username : 
-            input(type='text', name="username")
-          .form-group
-            label Password : 
-            input(type='password', name="password")
-          .form-group
+          .form-group.row
+            label Username :
+            input(type='text', name="username").pull-right.col-md-offset-2
+          .form-group.row
+            label Password :
+            input(type='password', name="password").pull-right.col-md-offset-2
+          .form-group.row
             label Email :
-            input(type='email', name="email")
+            input(type='email', name="email").pull-right.col-md-offset-2
 
           button#login_submit.btn.btn-success.btn-block(type='submit')
             i.icon-ok.icon-white
             |  Create your account
+          hr
