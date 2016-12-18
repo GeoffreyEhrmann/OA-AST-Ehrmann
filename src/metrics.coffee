@@ -11,9 +11,9 @@ module.exports =
     ws.on 'close', callback
 
     for metric in metrics
-      {timestamp, value} = metric
+      {id, value} = metric
       ws.write
-        key: "metric:#{id}:#{timestamp}"
+        key: "metric:#{id}"
         value: value
     ws.end()
 
@@ -31,10 +31,10 @@ module.exports =
     rs = db.createReadStream options
 
     rs.on 'data', (data) ->
-      [_, _id, timestamp] = data.key.split ':'
+      [_, _id, x] = data.key.split ':'
       metrics.push
         id: _id
-        timestamp: timestamp
+        x: x
         value: data.value
     rs.on 'error', callback
     rs.on 'close', ->
@@ -50,7 +50,7 @@ module.exports =
       
       toDel = []
       for metric in metrics
-        key = "metric:#{metric.id}:#{metric.timestamp}"
+        key = "metric:#{metric.id}"
         toDel.push {type: 'del', key: key}
       db.batch toDel, (err) ->
         callback err

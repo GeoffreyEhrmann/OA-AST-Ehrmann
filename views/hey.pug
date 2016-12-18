@@ -23,7 +23,7 @@ block content
           .panel.panel-default
             .panel-heading Add a metric
             .panel-body 
-              form
+              form(method="get")
                 .form-group.row
                   .col-xs-2.col-form-label X
                   .col-xs-10
@@ -48,6 +48,16 @@ block content
     script
       :coffee-script
 
+        $.ajax(
+          type: 'get'
+          url: '/user-metrics/',
+          headers:{
+            'X-HTTP-Method-Override', 'get'
+          }
+        ).done((data) ->
+          get(0)
+        )
+
         graphData = []
         chart = {}
 
@@ -62,7 +72,7 @@ block content
         drawGraph = () ->
           values = [1,2,2,4,-2,15,0]
           colors = [75,255,192]
-          dates = [0,1,2,3,4,5,6]
+          x = [0,1,2,3,4,5,6]
 
 
           refreshForm(graphData)
@@ -70,7 +80,7 @@ block content
           chart = new Chart(ctx,
             type: 'line'
             data:
-              labels: dates
+              labels: x
               datasets: [ {
                 label: 'Value'
                 data: values
@@ -87,6 +97,8 @@ block content
 
 
         drawGraph()
+
+        
 
         
 
