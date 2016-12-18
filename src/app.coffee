@@ -41,6 +41,6 @@ app.use require('./routes/auth.coffee') express.Router()
 app.use require('./routes/users.coffee') express.Router()
 app.use require('./routes/user-metrics.coffee') express.Router()
 
-#if everything is ok, display that the app is listening ti the port 3333
+#if everything is ok, display that the app is listening to the port 3333
 app.listen app.get('port'), ->
   console.log "listening on port #{app.get 'port'}"

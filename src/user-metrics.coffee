@@ -27,11 +27,11 @@ module.exports =
 
     for metricId in metricsId
       ws.write
-        key: "user-metric:#{username}:#{metricId}"
+        key: "user-metrics:#{username}:#{metricId}"
         value: true
     ws.end()
   
 
   remove: (username, metricId, callback) ->
-    db.del "user-metric:#{username}:#{metricId}" , (err) ->
+    db.del "user-metrics:#{username}:#{metricId}" , (err) ->
       callback(err)
