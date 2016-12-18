@@ -7,7 +7,7 @@ module.exports = (router) ->
     else
       next()
   router.get "/", authCheck, (req, res) ->
-    res.redirect '/hello/' + req.session.username
+    res.redirect '/hey/' + req.session.username
 
   router.get '/user/:username', authCheck, (req, res) ->
     user.get req.params.username, (err, value) ->
@@ -23,8 +23,8 @@ module.exports = (router) ->
       else
         res.status(200).send()
 
-  router.get "/hello/:name",authCheck, (req, res) ->
-    res.render 'hello',
+  router.get "/hey/:name",authCheck, (req, res) ->
+    res.render 'hey',
       name: req.params.name
 
   router
