@@ -8,7 +8,7 @@ module.exports = (router) ->
     else
       next()
   router.get "/", authCheck, (req, res) ->
-    res.redirect '/hello/' + req.session.username
+    res.redirect '/hey/' + req.session.username
 
   router.get "/metrics(/:id)?", authCheck, (req, res) ->
     #console.log(req)
@@ -50,21 +50,21 @@ module.exports = (router) ->
     else
       res.status(401).send()
 
-  router.get "/user-metric", authCheck, (req,res) ->
+  router.get "/user-metrics", authCheck, (req,res) ->
     userMetrics.get req.session.username, (err, metricsId) ->
       if err
         res.status(404).send(err)
       else
         res.status(200).json metricsId
 
-  router.post "/user-metric", authCheck, (req, res) ->
+  router.post "/user-metrics", authCheck, (req, res) ->
     userMetrics.save req.session.username, req.body, (err)->
     if err
         res.status(404).send(err)
     else
         res.status(200).send()
 
-  router.delete "/user-metric/:id", authCheck, (req,res) ->
+  router.delete "/user-metrics/:id", authCheck, (req,res) ->
     userMetrics.remove req.session.username, req.params.id, (err) ->
       if err
         res.status(404).send(err)
