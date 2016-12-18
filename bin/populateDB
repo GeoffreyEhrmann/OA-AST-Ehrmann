@@ -4,7 +4,7 @@ dbusers = require('../src/db')("#{__dirname}/../db/users")
 
 #first user
 user =
-  username: 'batman'
+  username: 'batman' #fill the db with use info
   pwd: 'robin'
   email: 'bat@man.mobile'
   name: 'bruce'
@@ -18,7 +18,7 @@ dbusers.put 'user:'+user.username,
 
 #second user
 user =
-  username: 'greenlantern'
+  username: 'greenlantern' #fill the db with use info
   pwd: 'vert'
   email: 'green@lantern.corp'
   name: 'al'
