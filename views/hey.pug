@@ -51,43 +51,19 @@ block content
         graphData = []
         chart = {}
 
-        $('#delete-button').click (e) ->
-          toDelete = $('#select-metric').val()
-          console.log(toDelete)
-          $.ajax(
-            type: 'DELETE'
-            url: '/user-metrics/' + toDelete,
-            headers:{
-              'X-HTTP-Method-Override', 'DELETE'
-            }
-          ).done((data) ->
-            graphData = graphData.filter (element) ->
-              return element.id != toDelete
-            values = []
-            graphData.map (d) ->
-              values.push(Number(d.value))
-            chart.data.datasets[0].data = values
-            chart.update()
-            refreshForm(graphData)
-          )
 
         refreshForm = (array) ->
           $('#select-metric').empty()
           for k in array
-            date = new Date(Number(k.timestamp)).toLocaleString()
-            $('#select-metric').append("<option value='" + k.id + "'>" + date + "</option>")
+            x = Math.random() * 20
+            $('#select-metric').append("<option value='" + k.id + "'>" + x + "</option>")
           $('#delete-form').css("display":"flex")
 
         drawGraph = () ->
-          values = [x:1 , y:2,
-                    x:3 , y:3]
-          colors = ["rgba(75,192,192,0.4)"]
-          dates = ['x','y']
-          $('#metrics').empty()
-          graphData.map (d) ->
-            dates.push(new Date(Number(d.timestamp)).toLocaleString())
-            colors.push(getRandomColor())
-            values.push(Number(d.value))
+          values = [1,2,2,4,-2,15,0]
+          colors = [75,255,192]
+          dates = [0,1,2,3,4,5,6]
+
 
           refreshForm(graphData)
           ctx = document.getElementById('metrics')
@@ -96,30 +72,22 @@ block content
             data:
               labels: dates
               datasets: [ {
-                label: 'Données'
+                label: 'Value'
                 data: values
-                backgroundColor: colors
+                fill: false
+                backgroundColor: "rgba("+colors+",0.4)"
+                borderColor: "rgba("+colors+",1)"
+
               } ]
             options:
               responsive: true
               maintainAspectRatio: true
+
           )
 
 
-        getChartFromDb = () ->
-          $.getJSON "/metrics", {}, (data) ->
-            graphData = data
-            drawGraph()
-            
-        getRandomColor = () ->
-          letters = '789ABCD';
-          color = '#';
-          for i in [0...6]
-              color += letters[Math.floor(Math.random() * 7)]
-          color
+        drawGraph()
 
-
-        getChartFromDb()
         
 
 
