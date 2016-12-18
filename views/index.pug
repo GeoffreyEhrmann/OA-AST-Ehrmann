@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    .container
+        .jumbotron
+            h1.text-center View metrics :
+        .field-container
+            input(type="text", placeholder="Enter your name", checked="").field#value
+            input(type="submit", value="Redirect!").btn#btn-submit
+            button.btn.btn-danger(href='/logout' onClick='document.location.href="/logout"') Logout
+    script
+      :coffee-script
+        $('#btn-submit').click (e) ->
+          e.preventDefault()
+          name = if $('#value').val().length == 0 then "unknow" else $('#value').val()
+          window.location.replace("http://localhost:3333/hey/" + name);

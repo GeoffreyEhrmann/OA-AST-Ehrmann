@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  .container
+    .jumbotron.headerLogin
+      #form
+        p Please enter your IDs
+        form#login(action='/login', method="post")
+          .form-group
+            label Username :
+            input(type='text', name="username")
+          .form-group
+            label Password :
+            input(type='password', name="password")
+          
+
+          button#login_submit.btn.btn-success.btn-block(type='submit')
+            i.icon-ok.icon-white
+            |  Connect to your account
+            
+        form(action='/signup', method="get")
+          button.btn.btn-primary.btn-block(type='submit') Create a new account

@@ -1,0 +1,41 @@
+{
+  "name": "ast",
+  "version": "1.0.0",
+  "description": "AST project",
+  "main": "src/app.coffee",
+  "scripts": {
+    "start": "bin/start",
+    "test": "bin/test",
+    "style": "bin/style",
+    "build": "bin/build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GeoffreyEhrmann/OA-AST-Ehrmann.git"
+  },
+  "author": "Geoffrey Ehrmann, Allan Stievenard",
+  "license": "ISC",
+  "homepage": "https://github.com/GeoffreyEhrmann/OA-AST-Ehrmann#readme",
+  "devDependencies": {
+    "coffee-script": "^1.11.1",
+    "mocha": "^3.1.1",
+    "should": "^11.1.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "chart.js": "^2.4.0",
+    "cookie-parser": "^1.4.3",
+    "errorhandler": "^1.5.0",
+    "express": "^4.14.0",
+    "express-session": "^1.14.2",
+    "install": "^0.8.1",
+    "jstransformer-coffee-script": "^1.1.0",
+    "level": "^1.5.0",
+    "level-session-store": "^2.0.1",
+    "level-ws": "0.0.1",
+    "method-override": "^2.3.6",
+    "morgan": "^1.7.0",
+    "pug": "^2.0.0-beta6",
+    "stylus": "^0.54.5"
+  }
+}

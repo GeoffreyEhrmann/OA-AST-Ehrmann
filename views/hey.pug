@@ -1,0 +1,125 @@
+extends layout
+
+block head
+  script(src="/js/jquery-2.1.4.min.js")
+  link(rel="stylesheet" href="/css/bootstrap.min.css")
+  link(rel="stylesheet" href="/css/style.css")
+  script(src="/js/bootstrap.min.js")
+  script(src="/bower_components/chart.js/dist/Chart.bundle.min.js")
+
+block content
+  .container
+    nav.navbar.navbar-default
+      .container-fluid.flexible
+        h1 View metrics
+        .button-right
+          button.btn.btn-danger(href='/logout' onClick='document.location.href="/logout"') Logout
+    .flexible-space-line
+      h2 Hey, #{name} ! Welcome to our project
+      button(type='button' class='btn-success btn' id="show-metrics") Show metrics
+  .container
+    .row
+      .col-md-9.col-lg-9.col-sm-12
+        .panel.panel-default
+          .panel-heading Metrics
+          .panel-body.panel-body-center
+            canvas(width="400", height="400")#metrics
+      .col-md-3.col-lg-3.col-sm-12
+          .panel.panel-default
+            .panel-heading Add a metric
+            .panel-body 
+      .col-md-3.col-lg-3.col-sm-12
+          .panel.panel-default
+            .panel-heading Remove a metric
+            .panel-body
+              form#delete-form
+                select(name="metric")#select-metric
+                input(value="Delete").btn.btn-danger#delete-button
+
+
+    script
+      :coffee-script
+
+        graphData = []
+        chart = {}
+
+        $('#delete-button').click (e) ->
+          toDelete = $('#select-metric').val()
+          console.log(toDelete)
+          $.ajax(
+            type: 'DELETE'
+            url: '/user-metrics/' + toDelete,
+            headers:{
+              'X-HTTP-Method-Override', 'DELETE'
+            }
+          ).done((data) ->
+            graphData = graphData.filter (element) ->
+              return element.id != toDelete
+            values = []
+            graphData.map (d) ->
+              values.push(Number(d.value))
+            chart.data.datasets[0].data = values
+            chart.update()
+            refreshForm(graphData)
+          )
+
+        refreshForm = (array) ->
+          $('#select-metric').empty()
+          for k in array
+            date = new Date(Number(k.timestamp)).toLocaleString()
+            $('#select-metric').append("<option value='" + k.id + "'>" + date + "</option>")
+          $('#delete-form').css("display":"flex")
+
+        drawGraph = () ->
+          values = [{
+                    x: randomScalingFactor(),
+                    y: randomScalingFactor(),
+                    r: Math.abs(randomScalingFactor()) / 5},
+                    {
+                    x: randomScalingFactor(),
+                    y: randomScalingFactor(),
+                    r: Math.abs(randomScalingFactor()) / 5}]
+          colors = []
+          dates = []
+          $('#metrics').empty()
+          graphData.map (d) ->
+            dates.push(new Date(Number(d.timestamp)).toLocaleString())
+            colors.push(getRandomColor())
+            values.push(Number(d.value))
+
+          refreshForm(graphData)
+          ctx = document.getElementById('metrics')
+          chart = new Chart(ctx,
+            type: 'bubble'
+            data:
+              labels: dates
+              datasets: [ {
+                label: 'Données'
+                data: values
+                backgroundColor: colors
+              } ]
+            options:
+              responsive: true
+              maintainAspectRatio: true
+          )
+          $('#metrics').addClass('visible')
+          $('#show-metrics').removeClass('btn-success').addClass('btn-invisible')
+
+        getChartFromDb = () ->
+          $.getJSON "/metrics", {}, (data) ->
+            graphData = data
+            drawGraph()
+            
+        getRandomColor = () ->
+          letters = '789ABCD';
+          color = '#';
+          for i in [0...6]
+              color += letters[Math.floor(Math.random() * 7)]
+          color
+
+        $('#show-metrics').click (e) ->
+          e.preventDefault()
+          if !$('#metrics').hasClass('visible') then getChartFromDb()
+        
+
+
