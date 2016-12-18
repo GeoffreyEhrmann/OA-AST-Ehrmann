@@ -23,7 +23,7 @@ block content
           .panel.panel-default
             .panel-heading Add a metric
             .panel-body 
-              form(method="get")
+              form(method="get" action:"/")
                 .form-group.row
                   .col-xs-2.col-form-label X
                   .col-xs-10
@@ -43,7 +43,7 @@ block content
 
         graphData = []
         chart = {}
-
+        
 
 
         drawGraph = () ->

@@ -1,4 +1,7 @@
-metrics = require '../metrics'
+metrics = require "../metrics"
 
 module.exports = (router) ->
-  console.log("test")
+  router.get "/" (req,res) ->
+    metrics.save req.body.x req.body.y
+
+  router
