@@ -24,7 +24,7 @@ module.exports = (router) ->
       else
         req.session.loggedIn= true
         req.session.username= data.username
-        res.redirect("/hello/" + req.body.username)
+        res.redirect("/hey/" + req.body.username)
 
   router.get '/logout', (req, res) ->
     delete req.session.loggedIn
