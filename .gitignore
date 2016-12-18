@@ -4,4 +4,4 @@ bower_components/*
 .vscode
 .DS_Store
 lib/*
-bin/*
+
