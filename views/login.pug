@@ -2,16 +2,16 @@ extends layout
 
 block content
   .container
-    .jumbotron.headerLogin.col-md-offset-4.col-md-4
+    .jumbotron.headerLogin.col-md-offset-4.col-md-4.col-lg-offset-4.col-lg-4
       #form
         p Please enter your IDs
         form#login(action='/login', method="post")
           .form-group
             label Username :
-            input(type='text', name="username")
+            input(type='text', name="username").pull-right.col-md-offset-2
           .form-group
             label Password :
-            input(type='password', name="password")
+            input(type='password', name="password").pull-right.col-md-offset-2
           
 
           button#login_submit.btn.btn-success.btn-block(type='submit')

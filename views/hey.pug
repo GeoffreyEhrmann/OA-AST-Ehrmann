@@ -16,7 +16,7 @@ block content
           button.btn.btn-danger(href='/logout' onClick='document.location.href="/logout"') Logout
     .flexible-space-line
       h2 Hey, #{name} ! Welcome to our project
-      button(type='button' class='btn-success btn' id="show-metrics") Show metrics
+      button(type='button' class='btn-success btn' id="show-metrics") Bring the metrics
   .container
     .row
       .col-md-9.col-lg-9.col-sm-12
@@ -28,6 +28,19 @@ block content
           .panel.panel-default
             .panel-heading Add a metric
             .panel-body 
+              form
+                .form-group.row
+                  .col-xs-2.col-form-label X
+                  .col-xs-10
+                    input(class="form-control" , type="x" , value="42" , id="x")
+                .form-group.row
+                  .col-xs-2.col-form-label Y
+                  .col-xs-10
+                    input(class="form-control" , type="y" , value="42" , id="y")
+                .form-group.row
+                  .col-lg-offset-4.col-lg-6
+                    button(type='submit' , class='btn btn-primary') Add
+
       .col-md-3.col-lg-3.col-sm-12
           .panel.panel-default
             .panel-heading Remove a metric
@@ -71,16 +84,10 @@ block content
           $('#delete-form').css("display":"flex")
 
         drawGraph = () ->
-          values = [{
-                    x: randomScalingFactor(),
-                    y: randomScalingFactor(),
-                    r: Math.abs(randomScalingFactor()) / 5},
-                    {
-                    x: randomScalingFactor(),
-                    y: randomScalingFactor(),
-                    r: Math.abs(randomScalingFactor()) / 5}]
-          colors = []
-          dates = []
+          values = [x:1 , y:2,
+                    x:3 , y:3]
+          colors = ["rgba(75,192,192,0.4)"]
+          dates = ['x','y']
           $('#metrics').empty()
           graphData.map (d) ->
             dates.push(new Date(Number(d.timestamp)).toLocaleString())
@@ -90,7 +97,7 @@ block content
           refreshForm(graphData)
           ctx = document.getElementById('metrics')
           chart = new Chart(ctx,
-            type: 'bubble'
+            type: 'line'
             data:
               labels: dates
               datasets: [ {
