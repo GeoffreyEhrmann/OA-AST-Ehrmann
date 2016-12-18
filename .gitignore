@@ -5,3 +5,4 @@ bower_components/*
 .DS_Store
 lib/*
 public/css/style.css
+bin/*
