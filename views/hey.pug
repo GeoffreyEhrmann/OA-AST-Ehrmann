@@ -8,10 +8,9 @@ block head
   script(src="/bower_components/chart.js/dist/Chart.bundle.min.js")
 
 block content
-  .container
-    .flexible-space-line
+  .container.row
       h2 Hey, #{name} ! Welcome to our project
-      button.btn.btn-danger(href='/logout' onClick='document.location.href="/logout"') Logout
+      button.button-right.btn.btn-danger(href='/logout' onClick='document.location.href="/logout"') Logout
   .container
     .row
       .col-md-9.col-lg-9.col-sm-12

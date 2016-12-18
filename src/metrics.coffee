@@ -36,7 +36,9 @@ module.exports =
         id: _id
         x: x
         value: data.value
-    rs.on 'error', callback
+    
+    rs.once 'error', (err) ->
+      console.error 'stream emitted error:'
     rs.on 'close', ->
       callback null, metrics
   
