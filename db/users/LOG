@@ -1,0 +1,12 @@
+2016/12/18-19:29:23.013 1e2c Recovering log #185
+2016/12/18-19:29:23.013 1e2c Level-0 table #187: started
+2016/12/18-19:29:23.021 1e2c Level-0 table #187: 260 bytes OK
+2016/12/18-19:29:23.033 1e2c Delete type=0 #185
+2016/12/18-19:29:23.033 1e2c Delete type=3 #182
+2016/12/18-19:29:23.033 8a0 Compacting 2@0 + 1@1 files
+2016/12/18-19:29:23.047 8a0 Generated table #189@0: 3 keys, 302 bytes
+2016/12/18-19:29:23.047 8a0 Compacted 2@0 + 1@1 files => 302 bytes
+2016/12/18-19:29:23.054 8a0 compacted to: files[ 2 2 0 0 0 0 0 ]
+2016/12/18-19:29:23.054 8a0 Delete type=2 #19
+2016/12/18-19:29:23.054 8a0 Delete type=2 #135
+2016/12/18-19:29:23.055 8a0 Delete type=2 #187
